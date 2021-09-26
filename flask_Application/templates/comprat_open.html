@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+{% extends 'base.html'%}
+
+{% block body %} 
+
+<div style="text-align:center;">
+    <img style="max-width:25%;" src="{{url_for('static', filename='img/オープン.png')}}"  alt="オープン状態">
+</div>
+
+
+<main class="form-signin">
+    <h1 class="text-center h1 mb-3 fw-normal">!!!!!!オープン!!!!!!</h1>  
+    <br>
+    <br>
+    <h3 class="text-center h1 mb-3 fw-normal">ログインに成功しました</h3>  
+    <h3 class="text-center h1 mb-3 fw-normal">{{Lab_name}}の鍵を解錠しました</h3>  
+    <h3 class="text-center h1 mb-3 fw-normal">ようこそ{{Lab_name}}へ</h3>  
+    <br>
+    <br>
+    <button  class="w-100 btn btn-lg btn-primary" onclick="location.href='/LockLabo?LaboID={{LaboID}}'">鍵をロックする</button>
+    <br>
+    <br>
+    <button  class="w-100 btn btn-lg btn-primary" onclick="location.href='/logout'">ログアウト</button>
+</main>
+
+
+{% endblock %}

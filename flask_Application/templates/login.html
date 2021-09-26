@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+{% extends 'base.html'%}
+
+{% block body %} 
+
+<div style="text-align:center;">
+    <img style="max-width:20%;" src="{{url_for('static', filename='img/ロック.png')}}"  alt="ロック状態">
+</div>
+
+
+<main class="form-signin">
+    <form action="/login_check?LaboID={{LaboID}}" method="POST">
+        <h1 class="text-center h1 mb-3 fw-normal">!!!!!!ロック!!!!!!</h1>  
+        <div class="form-group">
+            <input type="text" class="form-control" name="Studentnumber" id="Studentnumber" placeholder="学籍番号" required /><br>
+            <input type="text" class="form-control" name="member_name" id="member_name" placeholder="名前(性 名)" required /><br>
+            <select class="form-select" name="member_status" id="member_status" aria-label="Default select example" >
+                <option value="member" selected >研究室メンバー</option>
+                <option value="guest">ゲスト</option>
+            </select>
+            <br>
+            <input type="password" class="form-control" name="password" id="password" placeholder="パスワード" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <button class="w-100 btn btn-lg btn-primary" type="submit">サインイン</button>
+        </div>
+    </form>
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+{% extends 'base.html'%}
+
+{% block body %} 
+
+<main>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="col-md-6 p-lg-6 mx-auto my-5">
+        <h1 class="display-5 fw-normal">QRスマートキーシステム</h1>
+        <p class="lead fw-normal">スマートフォンをかざすだけでどんな時もカギいらずな生活を</p>
+        <a class="btn btn-outline-secondary" href="/QRreader">今すぐQRコードをスキャン</a>
+      </div>
+      <div class="product-device shadow-sm d-none d-md-block"></div>
+      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+    </div>
+
+
+    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+        <div class="bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+          <div class="my-3 py-3">
+            <h2 class="display-5">QRコードを撮影してロック解錠!!</h2>
+            <p class="lead">QRコードを読み込み、パスワードを入力すると自動でカギが解錠します</p>
+            <img style="width: 60%;" src="/static/img/スマホで撮影する人のイラスト.png" alt="スマホで撮影する人のイラスト">
+        </div>
+            <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 100%; border-radius: 21px 21px 0 0;">
+            <br><img style="width:250px;" src="/static/img/オープン.png" alt="オープン">
+        </div>
+        </div>
+        <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+            <div class="my-3 p-3">
+                <h2 class="display-5">ログイン状態ならガギのロックまで!!</h2>
+                <p class="lead">グイン状態ならページ内で解錠･施錠が自在に行なえます。</p>
+                <img style="width: 55%;" src="/static/img/スマホを使う人のイラスト.png" alt="スマホを使う人のイラスト"> 
+            </div>
+            <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 100%; border-radius: 21px 21px 0 0;">
+                <br><img style="width:420px;" src="/static/img/ロック_透過.png" alt="ロック">
+            </div>
+        </div>
+    
+    </div>
+
+
+</main>
+  
+
+
+<!-- 
+<br><br>
+
+<article class="blog-post">
+    <h1 class="blog-post-title">特徴</h1>
+    <h2>見出し</h2>
+    <p>本文</p>
+
+    <h1 class="blog-post-title">主な使い方</h1>
+    <h2>見出し</h2>
+    <p>QRコードにかざす</p>
+</article> -->
+
+
+  <footer class="container py-5">
+    <div class="row">
+      <div class="col-6 col-md">
+        <h5>特徴</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">クールなスタッフ</a></li>
+          <li><a class="link-secondary" href="#">その他の特徴</a></li>
+          <li><a class="link-secondary" href="#">チームの特徴</a></li>
+          <li><a class="link-secondary" href="#">開発者向け</a></li>
+          <li><a class="link-secondary" href="#">そのほか</a></li>
+          <li><a class="link-secondary" href="#">最後</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>リソース</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">リソース</a></li>
+          <li><a class="link-secondary" href="#">リソース名</a></li>
+          <li><a class="link-secondary" href="#">その他のリソース</a></li>
+          <li><a class="link-secondary" href="#">最後のリソース</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>リソース</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">ビジネス</a></li>
+          <li><a class="link-secondary" href="#">教育</a></li>
+          <li><a class="link-secondary" href="#">政治</a></li>
+          <li><a class="link-secondary" href="#">ゲーム</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>この製品について</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">チーム</a></li>
+          <li><a class="link-secondary" href="#">場所</a></li>
+          <li><a class="link-secondary" href="#">プライバシー</a></li>
+          <li><a class="link-secondary" href="#">利用規約</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+<br><br>
+
+
+{% endblock %}

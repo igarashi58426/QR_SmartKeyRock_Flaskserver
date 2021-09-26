@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootsteap CSS-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+
+    <title>QR スマートキー システム</title>
+    {% block head %} {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-dark bg-dark p-3">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">鶴岡高専 QR スマートキー システム</a>
+          </div>
+          <!-- <button class="btn btn-primary navbar-btn"  onclick="location.href='/QRreader'">QRリーダー</button> -->
+          <a class="btn btn-secondary" href="/QRreader">QRリーダー</a>
+
+        </div>
+      </nav>
+
+    
+    <div class="row">
+        <!-- サイドバー 2/12-->
+        <div class="sidebar col-md-1 visible-lg visible-md">
+            <div class="list-group">
+                
+            </div>
+        </div>
+        <div class="col-md-10 col-md-offset-2">
+<!-- メイン 8/12 -->
+<!-- ------------------------------------------ -->
+        {% block body %} {% endblock %}
+<!-- ------------------------------------------ -->
+        </div>
+    
+  
+</div>
+
+  
+<!--bootsteap javascript-->
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

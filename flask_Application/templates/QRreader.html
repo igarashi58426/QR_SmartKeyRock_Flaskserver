@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+{% extends 'base.html'%}
+
+{% block body %} 
+
+<main class="form-signin">
+    <h1 class="text-center h1 mb-3 fw-normal">QRコード Webスキャナー</h1>  
+    <button class="w-100 btn btn-lg btn-primary" id="qrcode_scan" onclick="qrcode_scan();">カメラを許可してスキャンスタート</button>
+    <br>
+    <br>
+    <div style="text-align: center;">
+        <video id="qrcode_camera" style="width: 80%; height: 80%; border: 1px solid black;" playsinline autoplay muted ></video><br>
+        <canvas id="qrcode_canvas" style="width: 80%; "></canvas>
+        <br>
+        <textarea id="qrcode_scaned_data" rows="2" cols="40"></textarea>
+        <button id ="BlinkURLbutton" class="w-100 btn btn-lg btn-primary" >スキャンしたURLへ</button>
+        <br>
+    </div>
+</main>
+
+<script src="\static\js\jsQR\jsQR.js"></script>
+
+<script  async>
+    const video = document.getElementById('qrcode_camera');
+    const qrcode_canvas = document.getElementById('qrcode_canvas');
+    const qrcode_scaned_data = document.getElementById('qrcode_scaned_data');
+    const BlinkURLbutton = document.getElementById('BlinkURLbutton');
+
+
+    let canvasCTX = qrcode_canvas.getContext('2d');
+    let animationId = 0; //アニメーションID
+
+
+    let imageData = null;
+
+    //カメラ起動
+    async function qrcode_scan(){
+        //表示テキストリセット
+        qrcode_scaned_data.value = "";
+        //キャンバスアニメーションを有効化
+        animationId = 0;
+
+        //getUserMedia呼び出し
+        await getDisplay();
+    
+        //キャンバス描画
+        qrcode_draw();
+    }
+                
+    async function getDisplay() {
+        console.log('Starting start function');
+        try {
+            console.log('Requesting local stream to getDisplayMedia');
+            // ideal直接指定と同じ,min強制的制約,max強制的制約,exact強制的実行,advancedできなければ代わりに実行
+            const getMediaStream = await navigator.mediaDevices.getUserMedia(
+                { video: { facingMode: "environment" }, 
+                audio: false });
+            console.log('Received local stream to getDisplayMedia');
+            video.srcObject = getMediaStream;
+        } catch (error) {//エラー処理
+            alert(`getUserMedia() error: ${error.name}`);
+        }
+    }
+
+    async function qrcode_draw(){
+        // キャンバスサイズ設定
+        qrcode_canvas.width = video.videoWidth
+        qrcode_canvas.height = video.videoHeight
+
+        //カメラをもとにキャンバス描画
+        canvasCTX.clearRect(0, 0, video.videoWidth, video.videoHeight);//キャンバスのクリア
+        canvasCTX.drawImage(video, 0, 0, qrcode_canvas.width, qrcode_canvas.height,0 ,0 , 500, 500);
+
+        let QRcode = null;
+        try{
+            //キャンバスのフレームをキャプチャー
+            imageData = canvasCTX.getImageData(0, 0, qrcode_canvas.width, qrcode_canvas.height);
+            //RQコード探索
+            QRcode = jsQR(imageData.data, qrcode_canvas.width, qrcode_canvas.height);
+        }catch(e){ console.log(e);}
+
+
+        if( QRcode && QRcode.data != "" ){  //QRコードがimageData内から発見された場合
+            console.log(QRcode);
+
+            // 再描画をストップ
+            animationId = 1;
+
+            //テキストエリアに描画
+            qrcode_scaned_data.value = QRcode.data;
+
+            // ボタンにURLを埋め込み
+            BlinkURLbutton.onclick = butotnClick;
+            function butotnClick(){
+               location.href = QRcode.data
+            }
+
+            // プレビュービデオの外枠を赤に
+            video.style.border = "5px solid red"
+
+            //QRコードの位置情報を取得
+            let pos = QRcode.location;
+
+            //QRコードの位置を青の輪郭で表示
+            canvasCTX.strokeStyle = "blue";
+            canvasCTX.lineWidth = 3;
+            canvasCTX.beginPath();
+            canvasCTX.moveTo(pos.topLeftCorner.x, pos.topLeftCorner.y);
+            canvasCTX.lineTo(pos.topRightCorner.x, pos.topRightCorner.y);
+            canvasCTX.lineTo(pos.bottomRightCorner.x, pos.bottomRightCorner.y);
+            canvasCTX.lineTo(pos.bottomLeftCorner.x, pos.bottomLeftCorner.y);
+            canvasCTX.lineTo(pos.topLeftCorner.x, pos.topLeftCorner.y);
+            canvasCTX.stroke();
+
+
+        //QRコードが発見できない場合はディレイをし、再試行
+        }else{
+            if (animationId == 0){
+                console.log('else');
+                await sleep(100)
+                qrcode_draw();
+            }
+        }
+    }
+
+
+    function sleep(wait_time){
+        return new Promise(resolve => {
+        setTimeout(() => {
+        resolve()
+        }, wait_time)
+        })
+    }
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
